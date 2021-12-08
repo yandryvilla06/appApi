@@ -9,7 +9,7 @@ export default createStore({
     setPersonajes(state, payload) {
       state.personajes = payload;
     },
-    setPersonesFilter(state, payload) {
+    setPersonajesFilter(state, payload) {
       state.personajesFilter = payload;
     },
   },
@@ -17,14 +17,17 @@ export default createStore({
     async getPersonajes({ commit }) {
       try {
         let response = await axios.get(
-          "https://rickandmortyapi.com/api/character"
+          "https://rickandmortyapi.com/api/character/?page='${i}'"
         );
         this.personajes = response.data;
+        // Al iniciar la app me va a rrelenar las dos variables la de filter la usaremos para busquedas
         commit("setPersonajes", this.personajes.results);
+        commit("setPersonajesFilter", this.personajes.results);
       } catch (error) {
         console.err(error);
       }
     },
   },
+
   modules: {},
 });
