@@ -1,6 +1,7 @@
 <template>
   <div id="Home">
     <navbar />
+    <search />
     <list-characters />
   </div>
 </template>
@@ -9,12 +10,13 @@
 // @ is an alias to /src
 import Navbar from "../components/Navbar.vue";
 import ListCharacters from "../components/ListCharacters.vue";
-
+import Search from "../components/Search.vue";
 export default {
   name: "Home",
   components: {
     Navbar,
     ListCharacters,
+    Search,
   },
 };
 </script>

@@ -4,7 +4,7 @@
       <input
         type="text"
         v-model="pbuscar"
-        v-on:click.ctrl="buscar"
+        @keyup="filter()"
         class="px-4 py-1 w-60"
         placeholder="Buscar.."
       />
@@ -25,7 +25,24 @@
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+    const pbuscar = ref("");
+
+    const filter = () => {
+      store.dispatch("SearchByName", pbuscar.value);
+    };
+
+    return {
+      pbuscar,
+      filter,
+    };
+  },
+};
 </script>
 
 <style></style>
