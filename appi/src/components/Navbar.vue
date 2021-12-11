@@ -9,7 +9,7 @@
 
     <div class="flex flex-row font-mono gap-5 mr-5 text-base sm:text-xl">
       <div><a>Personajes</a></div>
-      <div><a>Localizaciones</a></div>
+      <div><a>Localizacion</a></div>
     </div>
   </div>
 </template>
