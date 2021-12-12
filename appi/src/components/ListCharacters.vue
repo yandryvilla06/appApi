@@ -28,7 +28,7 @@ export default {
       // Pillamos la mutacion de personajes filter
       return store.state.personajesFilter;
     });
-    
+
     onMounted(() => {
       store.dispatch("getPersonajes");
     });
