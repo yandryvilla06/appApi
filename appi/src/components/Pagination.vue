@@ -22,6 +22,7 @@
 
 <script>
 import { useStore } from "vuex";
+import {computed} from "vue";
 
 export default {
   name: "Pagination",
@@ -29,12 +30,15 @@ export default {
   setup() {
     const store = useStore();
 
-    const nextPage = () => {
-      store.dispatch("Pagination");
-    };
+    const page = computed(() => {
+      // Pillamos la mutacion de personajes filter
+      return store.state.page;
+    });
+
+    
 
     return {
-      nextPage,
+      page,
     };
   },
 };
