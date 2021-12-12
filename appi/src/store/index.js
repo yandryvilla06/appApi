@@ -59,7 +59,10 @@ export default createStore({
 
     async Pagination({commit,state}){
        
-        
+      const siguiente =state.personajes
+      
+       commit("setPersonajesFilter", siguiente.next);
+
     }
 
 
