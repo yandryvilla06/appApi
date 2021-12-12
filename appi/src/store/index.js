@@ -6,11 +6,7 @@ export default createStore({
 
     personajes: [],
     personajesFilter: [],
-    totalPages:1,
-    page:1,
-    next:" ",
-    prev:" "
-
+    page: 1,
   },
   mutations: {
     setPersonajes(state, payload) {
@@ -19,21 +15,18 @@ export default createStore({
     setPersonajesFilter(state, payload) {
       state.personajesFilter = payload;
     },
-
-    setNextPage(state,payload){
-      state.next=payload
-    },
-
-    setPrevPage(state,payload){
-      state.prev=payload
-    }
-
   },
+
   actions: {
-    async getPersonajes({ commit }) {
+    async getPersonajes({ commit, state }) {
       try {
         let response = await axios.get(
-          "https://rickandmortyapi.com/api/character"
+          "https://rickandmortyapi.com/api/character/",
+          {
+            params: {
+              page: state.page,
+            },
+          }
         );
         this.personajes = response.data;
         // Al iniciar la app me va a rrelenar las dos variables la de filter la usaremos para busquedas por lo que se ira modificcando muchas veces es por eso que en el commit usamos los resultados de personajes
@@ -56,17 +49,6 @@ export default createStore({
 
       commit("setPersonajesFilter", results);
     },
-
-    async Pagination({commit,state}){
-       
-      const siguiente =state.personajes
-      
-       commit("setPersonajesFilter", siguiente.next);
-
-    }
-
-
-
   },
 
   modules: {},
