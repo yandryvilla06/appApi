@@ -5,24 +5,23 @@
       v-on:click="nextPage()"
       class="flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md"
     >
-      Previous
+      Siguiente
     </button>
-
+    <a>{{data.page}}</a>
     <button
       href="#"
-      :v-model="page"
-      v-on:click="nextPage()"
+      v-on:click="prevPage()"
       class="px-4 py-2 font-bold text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white"
     >
-      Next
+      Anterior
     </button>
-    <a>{{ page }}</a>
+    
   </div>
 </template>
 
 <script>
 import { useStore } from "vuex";
-import {computed} from "vue";
+import { reactive } from "vue";
 
 export default {
   name: "Pagination",
@@ -30,15 +29,33 @@ export default {
   setup() {
     const store = useStore();
 
-    const page = computed(() => {
-      // Pillamos la mutacion de personajes filter
-      return store.state.page;
+    const data = reactive({
+      page: store.state.page,
+     
     });
 
-    
+    const nextPage = () => {
+      if (data.page <= 42) 
+      data.page++ 
+       
+       console.log(data.page);
+   store.dispatch("getPersonajes",data.page);
+      };
+
+
+    const prevPage = () => {
+      if ( data.page>= 2)
+       data.page--;
+        
+      store.dispatch("getPersonajes",data.page);
+    };
+
 
     return {
-      page,
+      data,
+      nextPage,
+      prevPage,
+     
     };
   },
 };
