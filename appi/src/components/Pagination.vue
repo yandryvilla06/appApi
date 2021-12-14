@@ -7,7 +7,7 @@
     >
       Siguiente
     </button>
-    <a>{{data.page}}</a>
+    <a>{{ data.page }}</a>
     <button
       href="#"
       v-on:click="prevPage()"
@@ -15,47 +15,49 @@
     >
       Anterior
     </button>
-    
   </div>
 </template>
 
 <script>
 import { useStore } from "vuex";
-import { reactive } from "vue";
+import { reactive,computed } from "vue";
 
 export default {
   name: "Pagination",
-
+  
   setup() {
     const store = useStore();
-
+    
     const data = reactive({
       page: store.state.page,
-     
     });
 
     const nextPage = () => {
-      if (data.page <= 42) 
-      data.page++ 
-       
-       console.log(data.page);
-   store.dispatch("getPersonajes",data.page);
-      };
-
-
-    const prevPage = () => {
-      if ( data.page>= 2)
-       data.page--;
+     
+      if (data.page <=pages.value)
+           
+           data.page++;
         
-      store.dispatch("getPersonajes",data.page);
+      store.dispatch("getPersonajes", data.page);
+      
     };
 
+   const pages = computed(() => {
+      // Pillamos la mutacion de pages y la devolvemos 
+      return store.state.pages;
+    });
+
+    const prevPage = () => {
+      if (data.page >= 2) data.page--;
+    
+      store.dispatch("getPersonajes", data.page);
+       
+    };
 
     return {
       data,
       nextPage,
       prevPage,
-     
     };
   },
 };
