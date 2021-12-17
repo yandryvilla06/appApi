@@ -1,5 +1,5 @@
-<template>
-  <div class="flex justify-between items-center m-8">
+<template id="Navbar">
+  <div class="flex justify-around sm:justify-between items-center m-8 ml-6">
     <div class="flex-shrink-0 h-12 w-16 sm:w-20 m-6">
       <img src="../assets/logo/rick.png" />
     </div>
@@ -7,16 +7,16 @@
       <h1 class="rick">Rick and Morty</h1>
     </div>
 
-    <div class="flex flex-row font-mono gap-5 mr-5 text-base sm:text-xl">
-      <div><a>Personajes</a></div>
-      <div><a>Localizacion</a></div>
+    <div class="flex flex-row font-mono gap-3 text-base sm:text-xl">
+      <router-link to="/">Personajes</router-link>
+      <router-link to="/episodios">Episodios</router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Navbar",
+  name: "#Navbar",
 };
 </script>
 

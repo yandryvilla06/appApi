@@ -2,7 +2,7 @@
   <div class="p-10">
     <!--Card 1-->
     <!--Estamos usando el prop de personaje que viene de listCharacter-->
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg" id="card">
       <img class="w-full" :src="personaje.image" alt="Mountain" />
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2 text-center text-red-500">
@@ -16,8 +16,19 @@
           <div>
             <p>{{ personaje.gender }}</p>
           </div>
-          <div>
-            <p>{{ personaje.status }}</p>
+          <div class="rounded" id="status">
+            <span
+              :class="
+                personaje.status == 'Alive'
+                  ? 'alive'
+                  : personaje.status == 'Dead'
+                  ? 'dead'
+                  : 'default'
+              "
+              class="rounded-full px-3"
+            >
+            </span>
+            <span>{{ personaje.status }}</span>
           </div>
         </div>
 
@@ -41,8 +52,26 @@
 
 <script>
 export default {
+  name: "#card",
   props: ["personaje"],
+  data() {
+    return {};
+  },
+  methods: {
+    changeColor() {},
+  },
 };
 </script>
 
-<style></style>
+<style>
+.alive {
+  background-color: greenyellow;
+}
+.dead {
+  background-color: red;
+}
+
+.default {
+  background-color: rgb(61, 11, 240);
+}
+</style>
