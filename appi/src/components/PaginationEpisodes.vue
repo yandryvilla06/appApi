@@ -35,7 +35,7 @@ export default {
     const nextPage = () => {
       if (data.page <= pages.value) data.page++;
 
-      store.dispatch("getPersonajes", data.page);
+      store.dispatch("getEpisodios", data.page);
     };
 
     const pages = computed(() => {
@@ -46,7 +46,7 @@ export default {
     const prevPage = () => {
       if (data.page >= 2) data.page--;
 
-      store.dispatch("getPersonajes", data.page);
+      store.dispatch("getEpisodios", data.page);
     };
 
     return {

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center sm:justify-between justify-around mx-12">
-    <div class="flex gap-2 text-sm  e sm:text-xl font-mono font-medium">
+    <div class="flex gap-2 text-sm e sm:text-xl font-mono font-medium">
       <div><button @click="filterStatus('Alive')">Vivos</button></div>
       <div><button @click="filterStatus('Dead')">Muertos</button></div>
       <div><button @click="filterStatus('Unknow')">Desconocidos</button></div>

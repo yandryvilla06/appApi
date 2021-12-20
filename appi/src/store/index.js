@@ -1,11 +1,14 @@
 import { createStore } from "vuex";
 import axios from "axios";
+
 export default createStore({
   state: {
     /*Creamos dos arrays el primero nos servira para obtener todos los personajes el 2 lo usaremos para las busquedas evitamos asi hacer 2 peticiones al server */
 
     personajes: [],
     personajesFilter: [],
+    episodios: [],
+    episodiosFilter: [],
 
     page: 1,
     pages: 0,
@@ -22,7 +25,15 @@ export default createStore({
     setPages(state, payload) {
       state.pages = payload;
     },
+    setEpisodios(state, payload) {
+      state.episodios = payload;
+    },
+    setEpisodiosFilter(state, payload) {
+      state.episodiosFilter = payload;
+    },
   },
+
+ 
 
   actions: {
     async getPersonajes({ commit }, page) {
@@ -44,7 +55,28 @@ export default createStore({
         commit("setPersonajes", this.personajes.results);
         commit("setPersonajesFilter", this.personajes.results);
       } catch (error) {
-        console.err(error);
+          console.log("error")
+      }
+    },
+
+    async getEpisodios({ commit },page) {
+      try {
+        let response = await axios.get(
+          "https://rickandmortyapi.com/api/episode/",  {
+            params: {
+              page: page,
+            },
+          }
+        );
+
+        this.episodios = response.data;
+        this.pages = response.data.info.pages;
+
+        commit("setPages", this.pages);
+        commit("setEpisodios", this.episodios.results),
+          commit("setEpisodiosFilter", this.episodios.results);
+      } catch (error) {
+        console.err.error;
       }
     },
     async SearchByName({ commit, state }, pbuscar) {
@@ -61,20 +93,17 @@ export default createStore({
       commit("setPersonajesFilter", results);
     },
 
-    async SearchByStatus({ state,commit }, statusName) {
-      const pstatus = statusName
+    async SearchByStatus({ state, commit }, statusName) {
+      const pstatus = statusName;
       /*Me busca todos los personajes en mi array rrecorriendolos con personaje 
        me los busca  con ese status y devolvemos todos los personajes de mi array*/
       const results = state.personajes.filter((personaje) => {
-        
-
         if (personaje.status.includes(pstatus)) {
           return personaje;
         }
       });
 
       commit("setPersonajesFilter", results);
-     
     },
   },
 

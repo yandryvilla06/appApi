@@ -57,9 +57,6 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    changeColor() {},
-  },
 };
 </script>
 
